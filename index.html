@@ -38,10 +38,11 @@ h1,h2,h3{font-family:var(--f-head);margin:0;font-weight:var(--w-head);line-heigh
 .s-title .sub{font-size:30px;margin-top:26px;color:var(--muted)}
 
 /* команды */
-.teams-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:50px;flex:1}
-.team-card{background:var(--card);border:var(--card-border);border-radius:var(--r);padding:44px;display:flex;flex-direction:column}
-.team-card .num{font-family:var(--f-head);font-size:90px;color:var(--accent);line-height:1}
-.team-card h3{font-size:38px;margin:20px 0 18px;line-height:1.15}
+.teams-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;margin-top:60px;flex:1;max-height:420px}
+.team-card{background:var(--card);border:var(--card-border);border-radius:var(--r);padding:44px;display:flex;flex-direction:column;justify-content:space-between}
+.team-card .num{font-family:var(--f-head);font-size:150px;color:var(--accent);line-height:1}
+.team-card h3{font-size:40px;margin:20px 0 0;line-height:1.15;white-space:nowrap}
+.t-exch .team-card h3{font-size:30px}
 .team-card p{font-size:24px;line-height:1.45;margin:0;color:var(--muted)}
 .vs{position:absolute;left:50%;top:58%;transform:translate(-50%,-50%);font-family:var(--f-head);font-size:64px;color:var(--accent2);background:var(--bg);padding:10px 22px;border-radius:999px}
 
@@ -230,10 +231,10 @@ body.pdf{overflow:visible;height:auto;background:var(--bg)}
 .mobile .s-title h1{font-size:40px!important}
 .mobile .s-title .sub{font-size:16px;margin-top:14px}
 .mobile .s-title .kicker{padding:6px 10px!important}
-.mobile .teams-grid{grid-template-columns:1fr;gap:14px;margin-top:20px}
+.mobile .teams-grid{grid-template-columns:1fr 1fr;gap:12px;margin-top:20px;max-height:none;flex:none}
 .mobile .team-card{padding:20px}
-.mobile .team-card .num{font-size:40px}
-.mobile .team-card h3{font-size:20px;margin:10px 0 8px}
+.mobile .team-card .num{font-size:56px}
+.mobile .team-card h3{font-size:18px!important;margin:10px 0 0}
 .mobile .team-card p{font-size:15px}
 .mobile .vs{display:none}
 .mobile .plan{grid-template-columns:1fr;gap:0;margin-top:18px}
@@ -279,11 +280,11 @@ body.pdf{overflow:visible;height:auto;background:var(--bg)}
 .mobile .bar{grid-template-columns:1fr auto!important;grid-template-areas:"n s" "t t";gap:6px 12px;font-size:17px}
 .mobile .bar>span:first-child{grid-area:n}.mobile .bar .tr{grid-area:t;height:26px}.mobile .bar .sc{grid-area:s;font-size:28px}
 .mobile .winner{font-size:28px;margin-top:26px}
-.mobile #score{left:10px;right:10px;bottom:10px!important;flex-direction:column;gap:6px}
-.mobile .chip{font-size:13px;padding:4px 5px 4px 12px;gap:5px}
+.mobile #score{left:10px;right:10px;bottom:10px!important;display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.mobile .chip{font-size:12px;padding:4px 4px 4px 10px;gap:3px}
 .mobile .chip .nm{max-width:none;flex:1}
-.mobile .chip .v{font-size:18px;min-width:30px}
-.mobile .chip button{width:30px;height:30px;font-size:16px}
+.mobile .chip .v{font-size:17px;min-width:24px}
+.mobile .chip button{width:28px;height:28px;font-size:15px}
 .mobile #nav{left:10px;right:10px;bottom:104px!important;font-size:12px}
 .mobile #nav #cnt{order:2}.mobile #nav #next{order:3;margin-left:auto;width:64px;border-radius:22px;background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
 .mobile #nav button{width:44px;height:44px}
@@ -351,44 +352,40 @@ const Q3 = [
  ['Вероятность возникновения потерь в результате непредвиденных, неблагоприятных условий.','Риск']
 ];
 const ABBR = [['АО','акционерное общество'],['ХТ','хозяйственные товарищества'],['ООО','общество с ограниченной ответственностью'],['ВНП','валовой национальный продукт'],['ВВП','валовой внутренний продукт'],['ИП','индивидуальный предприниматель'],['ББ','бухгалтерский баланс'],['СБП','система быстрых платежей'],['ППФ',null],['ГМБ',null],['ЦБ','центральный банк'],['МВФ','международный валютный фонд'],['НДФЛ','налог на доходы физических лиц'],['ТНК','транснациональные корпорации'],['КФ',null],['НДС','налог на добавленную стоимость'],['ПФ','проектное финансирование'],['ИНН','идентификационный номер налогоплательщика'],['МРОТ','минимальный размер оплаты труда'],['ТАО',null]];
-const CUR = [['Канада','канадский доллар'],['Белоруссия','белорусский рубль'],['Франция','евро'],['Китай','юань'],['Израиль','шекель'],['Индия','рупия'],['Япония','иена'],['Казахстан','тенге'],['Польша','злотый'],['Турция','лира'],['Чехия','крона'],['Германия','евро'],['Мексика','песо'],['Швейцария','франк']];
+const CUR = [['Канада','доллар'],['Белоруссия','рубль'],['Франция','евро'],['Китай','юань'],['Израиль','шекель'],['Индия','рупия'],['Япония','иена'],['Казахстан','тенге'],['Польша','злотый'],['Турция','лира'],['Чехия','крона'],['Германия','евро'],['Мексика','песо'],['Швейцария','франк']];
 const LETTERS = 'АБВДИКМНОПРСТФЭ'.split('');
 
 /* ================= СЛАЙДЫ ================= */
 const hdr = (label) => `<div class="top">${LOGO}<span>${label}</span><span class="sp"></span><span>Экономическая викторина</span></div>`;
 const cTop = (n) => hdr(`Конкурс ${n} из 7 · ${CONTESTS[n-1]}`);
 const timer = (sec) => `<div class="timer" data-sec="${sec}"><span class="t"></span><button class="tbtn" data-t="go" title="Старт / пауза (T)">▶</button><button class="tbtn" data-t="reset" title="Сброс (R)">↺</button></div>`;
-const intro = (n, rules, pts, extra='') => `<section class="slide s-intro${extra?' has-x':''}">${cTop(n)}<div class="big-n">${n}</div>
+const intro = (n, rules, extra='') => `<section class="slide s-intro${extra?' has-x':''}">${cTop(n)}<div class="big-n">${n}</div>
   <div class="ix"><div class="kicker">Конкурс ${n}</div><h2>${CONTESTS[n-1]}</h2>
-  <ul class="rules">${rules.map(r=>`<li>${r}</li>`).join('')}</ul>
-  <div class="pts">${pts.map(p=>`<span class="pill">${p}</span>`).join('')}</div></div>${extra?`<div class="iw">${extra}</div>`:''}</section>`;
+  <ul class="rules">${rules.map(r=>`<li>${r}</li>`).join('')}</ul></div>${extra?`<div class="iw">${extra}</div>`:''}</section>`;
 
 const S = [];
 S.push(`<section class="slide s-title"><div class="deco"></div>${LOGO}
   <div class="kicker">Университетский колледж МГРИ им. Е.А. Козловского</div>
   <h1>Экономическая<br>викторина</h1>
-  <div class="sub">7 конкурсов · 2 команды · 60 минут</div></section>`);
+  <div class="sub">7 конкурсов · 4 команды · 60 минут</div></section>`);
 
 S.push(`<section class="slide">${hdr('Участники')}<div class="kicker">Сегодня соревнуются</div><h2 style="font-size:80px">Команды</h2>
-  <div class="teams-grid">
-    <div class="team-card"><div class="num">01</div><h3>Университетский колледж МГРИ им. Е.А. Козловского</h3><p>Направление «Финансы»<br>6 студентов 3 курса · 4 студента 2 курса</p></div>
-    <div class="team-card"><div class="num">02</div><h3>Факультет экономики и управления им. академика М.И. Агошкова</h3><p>6 студентов 2 курса · 4 студента 1 курса</p></div>
-  </div><div class="vs">VS</div></section>`);
+  <div class="teams-grid">${[1,2,3,4].map(i=>`<div class="team-card"><div class="num">0${i}</div><h3>Команда ${i}</h3></div>`).join('')}</div></section>`);
 
 S.push(`<section class="slide">${hdr('План')}<div class="kicker">Программа</div><h2 style="font-size:80px">7 испытаний</h2>
   <ol class="plan">${CONTESTS.map((c,i)=>`<li><b>${i+1}</b>${c}</li>`).join('')}<li><b>★</b>Итоги и награждение</li></ol></section>`);
 
 // 1
-S.push(intro(1,['За 5 минут запишите как можно больше экономических слов на одну букву','Затем команды по очереди называют слова, не повторяясь','Побеждает команда, назвавшая слово последней'],['победитель — 5 баллов','вторая команда — 4 балла'],
+S.push(intro(1,['За 5 минут запишите как можно больше экономических слов на одну букву','Затем команды по очереди называют слова, не повторяясь','Побеждает команда, назвавшая слово последней'],
  `<div class="letter" title="Клик — выбрать букву">?</div><div class="hint">клик — случайная буква</div>${timer(300)}`));
 
 // 2
-S.push(intro(2,['На экране — слова с перепутанными буквами','Отвечает команда, первой поднявшая руку','Ошибка — ход переходит соперникам'],['1 балл за слово']));
+S.push(intro(2,['На экране — слова с перепутанными буквами','Отвечает команда, первой поднявшая руку','Ошибка — ход переходит соперникам']));
 S.push(`<section class="slide">${cTop(2)}<div class="kicker">Соберите слово · клик по карточке — ответ</div><h2 style="font-size:72px">Разгадай шифр</h2>
   <div class="cards">${CIPHER.map((c,i)=>`<div class="flip step"><div class="in"><div class="f"><small>№${i+1}</small><span>${c[0]}</span></div><div class="b"><small>№${i+1}</small><span>${c[1]}</span></div></div></div>`).join('')}</div></section>`);
 
 // 3
-S.push(intro(3,['20 вопросов на знание экономических терминов','Отвечает команда, первой поднявшая руку','Ошибка — ход переходит соперникам'],['1 балл за верный ответ']));
+S.push(intro(3,['20 вопросов на знание экономических терминов','Отвечает команда, первой поднявшая руку','Ошибка — ход переходит соперникам']));
 Q3.forEach((q,i)=>S.push(`<section class="slide s-q">${cTop(3)}<div class="qn">${String(i+1).padStart(2,'0')}<small> / 20</small></div>
   <div class="q">${q[0]}</div><div class="ans step"><span class="lbl">Ответ</span><span class="v${q[2]?' sm':''}">${q[1]}</span></div></section>`));
 
@@ -399,18 +396,18 @@ S.push(`<section class="slide">${cTop(4)}<div class="kicker">Разминка</d
     <div class="factor step"><div class="ic">⛰</div><h3>Земля</h3><p>пословицы о природных ресурсах</p></div>
     <div class="factor step"><div class="ic">₽</div><h3>Капитал</h3><p>пословицы о деньгах, богатстве и бедности</p></div>
   </div></section>`);
-S.push(intro(4,['За 5 минут запишите как можно больше пословиц о труде, земле и капитале','Команды зачитывают пословицы по очереди, не повторяясь'],['1 балл за пословицу'],timer(300)));
+S.push(intro(4,['За 5 минут запишите как можно больше пословиц о труде, земле и капитале','Команды зачитывают пословицы по очереди, не повторяясь'],timer(300)));
 
 // 5
-S.push(intro(5,['Среди аббревиатур есть настоящие и выдуманные','Выберите реальные и расшифруйте их','Команда обсуждает и сдаёт ответ письменно'],['+1 за верный ответ','−1 за неверный']));
+S.push(intro(5,['Среди аббревиатур есть настоящие и выдуманные','Выберите реальные и расшифруйте их','Команда обсуждает и сдаёт ответ письменно']));
 S.push(`<section class="slide">${cTop(5)}<div class="kicker">Какие из них существуют? · клик — проверка</div><h2 style="font-size:54px">Расшифруй аббревиатуру</h2>
   <div class="tiles">${ABBR.map(a=>`<div class="tile step ${a[1]?'real':'fake'}"><b>${a[0]}</b><i>${a[1]||'не существует'}</i></div>`).join('')}</div></section>`);
 
 // 6
-S.push(intro(6,['От каждой команды выходит один участник и тянет фант с понятием','Показывает его своей команде только жестами — без слов и звуков','Команда отгадывает термин'],['3 балла за угаданное слово'],timer(60)));
+S.push(intro(6,['От каждой команды выходит один участник и тянет фант с понятием','Показывает его своей команде только жестами — без слов и звуков','Команда отгадывает термин'],timer(60)));
 
 // 7
-S.push(intro(7,['У команд — карточки с названиями валют','На экране появляется страна','Поднимите карточку с её денежной единицей'],['1 балл за верную валюту']));
+S.push(intro(7,['У команд — карточки с названиями валют','На экране появляется страна','Поднимите карточку с её денежной единицей']));
 CUR.forEach((c,i)=>S.push(`<section class="slide s-cur">${cTop(7)}<div class="kicker">Страна ${i+1} из ${CUR.length}</div>
   <div class="country">${c[0]}</div><div class="ans step"><span class="lbl">Валюта</span><span class="v">${c[1]}</span></div></section>`));
 
@@ -424,8 +421,8 @@ const $ = (q,r=document)=>r.querySelector(q), $$=(q,r=document)=>[...r.querySele
 $('#slides').innerHTML = S.join('');
 const slides = $$('.slide');
 let cur = 0;
-const store = { get(k,d){try{const v=localStorage.getItem('eqz_'+location.pathname+k);return v?JSON.parse(v):d}catch(e){return d}}, set(k,v){try{localStorage.setItem('eqz_'+location.pathname+k,JSON.stringify(v))}catch(e){}} };
-let teams = store.get('teams',[{n:'Колледж МГРИ',s:0},{n:'ФЭУ им. Агошкова',s:0}]);
+const store = { get(k,d){try{const v=localStorage.getItem('eqz4_'+location.pathname+k);return v?JSON.parse(v):d}catch(e){return d}}, set(k,v){try{localStorage.setItem('eqz4_'+location.pathname+k,JSON.stringify(v))}catch(e){}} };
+let teams = store.get('teams',[1,2,3,4].map(i=>({n:'Команда '+i,s:0})));
 
 function fit(){const de=document.documentElement,vw=de.clientWidth,vh=de.clientHeight,m=!location.search.includes('pdf')&&vw<820&&vw/vh<1.3;document.body.classList.toggle('mobile',m);
   const st=$('#stage');if(!st||m)return;const s=Math.min(vw/1600,vh/900);st.style.transform=`translate(-50%,-50%) scale(${s})`}
